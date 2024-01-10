@@ -1,0 +1,11 @@
+﻿@{
+	ViewData["Title"] = "Output Form";
+}
+
+@if(!string.IsNullOrEmpty(ViewBag.FN) && !string.IsNullOrEmpty(ViewBag.LN)) {
+	<h2>Name: @ViewBag.FN @ViewBag.LN</h2>
+} else {
+	<div class="text-danger">
+		<h4>Aren't you forgetting something like First Name or Last Name?</h4>
+	</div>
+}
