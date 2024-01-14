@@ -9,6 +9,8 @@
 
 		public float? Rating {get; set;}
 
+		public DateTime? ReleaseDate {get; set;}
+
 		// ALWAYS NEEDED (For MVC)
 		public Movie() {;}
 

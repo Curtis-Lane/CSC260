@@ -12,5 +12,14 @@ namespace Movies.Controllers {
 		public IActionResult Index() {
 			return View();
 		}
+
+		public IActionResult DisplayMovie() {
+			Movie m = new Movie("Tron", 1982, 4.7f);
+			return View(m);
+		}
+
+		public IActionResult MultMovies() {
+			return View(MovieList);
+		}
 	}
 }
