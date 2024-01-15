@@ -1,0 +1,20 @@
+﻿@{
+	ViewData["Title"] = "Output";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+
+@if(!string.IsNullOrEmpty(ViewBag.EX) && !string.IsNullOrEmpty(ViewBag.AV) && !string.IsNullOrEmpty(ViewBag.NU) && !string.IsNullOrEmpty(ViewBag.NO) && !string.IsNullOrEmpty(ViewBag.AJ)) {
+	<h3>
+		<b>@ViewBag.EX</b>! He said <b>@ViewBag.NU</b> times <b>@ViewBag.AV</b> as he jumped into his convertible <b>@ViewBag.NO</b> and drove off with his <b>@ViewBag.AJ</b> wife.
+	</h3>
+} else {
+	<div class="text-danger">
+		<h1>You're forgetting a few input fields there fella.</h1>
+	</div>
+}
+
+<br />
+<h4>
+	<a href="~/Home/Input">Go back to the input form.</a>
+</h4>

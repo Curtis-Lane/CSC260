@@ -1,0 +1,43 @@
+﻿@{
+	ViewData["Title"] = "Input";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+
+<form asp-controller="Home" asp-action="Output" method="post">
+	<div class="row">
+		<div class="col-12">
+			<label for="exclamation">Exclamation</label>
+			<input id="exclamation" type="text" name="exclamation" placeholder="Exclamation (Capitalized)" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<label for="number">Number</label>
+			<input id="number" type="text" name="number" placeholder="Number" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<label for="adverb">Adverb</label>
+			<input id="adverb" type="text" name="adverb" placeholder="Adverb (Non-capitalized)" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<label for="noun">Noun</label>
+			<input id="noun" type="text" name="noun" placeholder="Noun (Non-capitalized)" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<label for="adjective">Adjective</label>
+			<input id="adjective" type="text" name="adjective" placeholder="Adjective (Non-capitalized)" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+</form>
