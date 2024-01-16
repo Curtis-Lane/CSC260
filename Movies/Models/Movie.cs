@@ -11,13 +11,17 @@
 
 		public DateTime? ReleaseDate {get; set;}
 
+		public string Image {get; set;}
+
 		// ALWAYS NEEDED (For MVC)
 		public Movie() {;}
 
-		public Movie(string Title, int? Year, float? Rating) {
+		public Movie(string Title, int? Year, float? Rating, DateTime? ReleaseDate, string Image) {
 			this.Title = Title;
 			this.Year = Year;
 			this.Rating = Rating;
+			this.ReleaseDate = ReleaseDate;
+			this.Image = Image;
 		}
 	}
 }

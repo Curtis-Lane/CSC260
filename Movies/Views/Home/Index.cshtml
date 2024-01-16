@@ -5,8 +5,24 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <img src="~/img/shrek.jpg" />
+    <img src="~/img/shrek.jpg" width="300" />
+    <br />
+
     <button type="button" class="btn btn-primary">CLICK ME <i class="bi bi-gear"></i></button>
 
     <a asp-controller="Home" asp-action="Privacy" asp-fragment="bob" asp-route-id="666">Privacy</a>
+
+    @* Form Parameters example *@
+    <form asp-controller="Home" asp-action="ParamTest" method="post">
+        <input type="text" name="s" />
+        <input hidden type="text" name="id" value="77" />
+        <button type="submit">Submit Form</button>
+    </form>
+
+    @* ASP-Route example *@
+    <a asp-controller="Home" asp-action="ParamTest" asp-route-id="77" asp-route-s="Routinator">Send id 77 Route</a>
+    <br />
+
+    @* Query Parameter example *@
+    <a href="~/Home/ParamTest?id=77&s=Queryinator">Send id 77 Query</a>
 </div>

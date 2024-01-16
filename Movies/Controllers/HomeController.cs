@@ -12,7 +12,14 @@ namespace Movies.Controllers {
             _logger = logger;
         }
 
-        public IActionResult Index() {
+		public IActionResult ParamTest(int? id, string s) {
+			return Content($"id = {id?.ToString() ?? "NULL"} {s}"); // Content returns JUST what you put in
+            // id? = Nullable variable
+            // ?? = Null coalescing operator, if variable is not null, do left stuff
+            // If null, do right stuff
+		}
+
+		public IActionResult Index() {
             return View();
         }
 

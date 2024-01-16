@@ -9,4 +9,13 @@
 	<h3>@Model.Title</h3>
 	<h3>@Model.Year</h3>
 	<h3>@Model.Rating</h3>
+	<img src="@Model.Image" width="250" />
+
+	@if(Model.ReleaseDate.HasValue) {
+		<h3>@Model.ReleaseDate.Value.ToShortDateString()</h3>
+		@*
+			If returning a game
+			@Model.ReleaseDate = null;
+		*@
+	}
 }
