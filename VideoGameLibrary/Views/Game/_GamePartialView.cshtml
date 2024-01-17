@@ -1,0 +1,29 @@
+﻿@{
+	//
+}
+
+@model VideoGame
+
+<div class="border text-center">
+	<img src="@Model.Image" height="325" />
+	<p>Title: @Model.Title</p>
+	<p>Platform: @Model.Platform</p>
+	<p>Genre: @Model.Genre</p>
+	<p>Rating: @Model.ESRBRating</p>
+	<p>Year: @Model.Year</p>
+	@if(Model.LoanedTo == null) {
+		<form asp-controller="Game" asp-action="Collection" method="post">
+			<input hidden type="text" name="ID" value="@Model.ID" />
+			<div class="row">
+				<div class="col-8">
+					<input asp-for="LoanedTo" class="form-control" />
+				</div>
+				<div class="col-4">
+					<button type="submit" class="btn btn-primary">Loan Game</button>
+				</div>
+			</div>
+		</form>
+	} else {
+		<p>Loaned out to @Model.LoanedTo on @Model.LoanDate.Value.ToShortTimeString()</p>
+	}
+</div>
