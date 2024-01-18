@@ -25,10 +25,10 @@
 		</form>
 	} else {
 		<div class="row">
-			<div class="col-9">
+			<div class="col-8">
 				<p>Loaned out to <b>@Model.LoanedTo</b> on <b>@Model.LoanDate.Value.ToShortDateString()</b></p>
 			</div>
-			<div class="col-3">
+			<div class="col-4">
 				<form asp-controller="Game" asp-action="Collection" method="post">
 					<input hidden type="text" name="ID" value="@Model.ID" />
 					<input hidden type="reset" name="LoanedTo" value="null" />
