@@ -9,14 +9,14 @@
 	<p>Title: @Model.Title</p>
 	<p>Platform: @Model.Platform</p>
 	<p>Genre: @Model.Genre</p>
-	<p>Rating: @Model.ESRBRating</p>
+	<p>ESRB Rating: @Model.ESRBRating</p>
 	<p>Year: @Model.Year</p>
 	@if(Model.LoanedTo == null) {
 		<form asp-controller="Game" asp-action="Collection" method="post">
 			<input hidden type="text" name="ID" value="@Model.ID" />
 			<div class="row">
 				<div class="col-8">
-					<input asp-for="LoanedTo" class="form-control" />
+					<input type="text" name="LoanedTo" class="form-control" />
 				</div>
 				<div class="col-4">
 					<button type="submit" class="btn btn-primary">Loan Game</button>
@@ -24,6 +24,17 @@
 			</div>
 		</form>
 	} else {
-		<p>Loaned out to @Model.LoanedTo on @Model.LoanDate.Value.ToShortTimeString()</p>
+		<div class="row">
+			<div class="col-9">
+				<p>Loaned out to <b>@Model.LoanedTo</b> on <b>@Model.LoanDate.Value.ToShortDateString()</b></p>
+			</div>
+			<div class="col-3">
+				<form asp-controller="Game" asp-action="Collection" method="post">
+					<input hidden type="text" name="ID" value="@Model.ID" />
+					<input hidden type="reset" name="LoanedTo" value="null" />
+					<button type="submit" class="btn btn-primary">Return Game</button>
+				</form>
+			</div>
+		</div>
 	}
 </div>
