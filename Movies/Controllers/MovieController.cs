@@ -36,5 +36,60 @@ namespace Movies.Controllers {
 			return RedirectToAction("MultMovies", "Movie");
 			//return View();
 		}
+
+		[HttpGet] // Loading the edit page
+		public IActionResult Edit(int? id) {
+			if(id == null) {
+				ViewData["Error"] = "Movie id not found";
+				return View();
+			} else {
+				Movie? m = MovieList.Find(x => x.ID == id);
+				//Movie? m = MovieList.Where(x => x.ID == id).FirstOrDefault();
+				if(m == null) {
+					ViewData["Error"] = "Cannot find movie with id " + id.ToString();
+				}
+				return View(m);
+			}
+		}
+
+		[HttpPost] // Save
+		public IActionResult Edit(Movie m) {
+			int index = MovieList.FindIndex(x => x.ID == m.ID);
+			if(index != -1) {
+				MovieList[index] = m;
+				TempData["Success"] = "Movie \"" + m.Title + "\" updated";
+				return RedirectToAction("MultMovies", "Movie");
+			} else {
+				TempData["Success"] = "Failed to update movie \"" + m.Title + "\"";
+				return RedirectToAction("MultMovies", "Movie");
+			}
+		}
+
+		[HttpGet]
+		public IActionResult Delete(int? id) {
+			if(id == null) {
+				ViewData["Error"] = "Movie id not found";
+				return View();
+			} else {
+				Movie? m = MovieList.Find(x => x.ID == id);
+				if(m == null) {
+					ViewData["Error"] = "Cannot find movie with id " + id.ToString();
+				}
+				return View(m);
+			}
+		}
+
+		[HttpPost]
+		public IActionResult Delete(Movie m) {
+			int index = MovieList.FindIndex(x => x.ID == m.ID);
+			if(index != -1) {
+				MovieList.RemoveAt(index);
+				TempData["Success"] = "Movie \"" + m.Title + "\" deleted";
+				return RedirectToAction("MultMovies", "Movie");
+			} else {
+				TempData["Success"] = "Failed to delete movie \"" + m.Title + "\"";
+				return RedirectToAction("MultMovies", "Movie");
+			}
+		}
 	}
 }

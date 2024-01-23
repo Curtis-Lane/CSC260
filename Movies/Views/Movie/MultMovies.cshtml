@@ -10,12 +10,9 @@
 	<h2>No movies provided</h2>
 } else {
 	<h2>Total movie count: @Model.Count()</h2>
+	<h4>@TempData["Success"]</h4>
 	<div class="row">
 		@foreach(Movie movie in Model) {
-@*	 		<h3>@movie.Title</h3>
-			<h3>@movie.Year</h3>
-			<h3>@movie.Rating</h3> *@
-
 			<div class="col-4">
 				<partial name="_MoviePartialView.cshtml" for="@movie" />
 			</div>
