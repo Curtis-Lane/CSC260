@@ -1,0 +1,32 @@
+﻿@{
+}
+
+@model Movie
+
+@if(Model == null) {
+	<h2>No movie provided</h2>
+} else {
+	<div class="text-center border">
+		<h3>@Model.Title</h3>
+		<h3>@Model.Year</h3>
+		<h3>@Model.Rating</h3>
+		<img src="@Model.Image" width="250" />
+
+		@if(Model.ReleaseDate.HasValue) {
+			<h3>@Model.ReleaseDate.Value.ToShortDateString()</h3>
+		}
+
+		<div class="row">
+			<div class="col-6">
+				<a asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-secondary mx-2">
+					<i class="bi bi-wrench"></i> Edit
+				</a>
+			</div>
+			<div class="col-6">
+				<a asp-controller="Movie" asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-secondary mx-2">
+					<i class="bi bi-trash"></i> Delete
+				</a>
+			</div>
+		</div>
+	</div>
+}

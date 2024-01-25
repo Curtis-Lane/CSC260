@@ -18,12 +18,11 @@ namespace VideoGameLibrary.Controllers {
 
 		[HttpPost]
 		public IActionResult Collection(int ID, string? LoanedTo) {
-			if(LoanedTo != null) {
-				VideoGame videoGame = videoGames.Find(x => x.ID == ID);
+			VideoGame videoGame = videoGames.Find(x => x.ID == ID);
+			if(!string.IsNullOrEmpty(LoanedTo)) {
 				videoGame.LoanedTo = LoanedTo;
 				videoGame.LoanDate = DateTime.Now;
 			} else {
-				VideoGame videoGame = videoGames.Find(x => x.ID == ID);
 				videoGame.LoanedTo = null;
 				videoGame.LoanDate = null;
 			}

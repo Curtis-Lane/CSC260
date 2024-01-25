@@ -27,14 +27,21 @@ namespace Movies.Controllers {
 		[HttpGet]
 		public IActionResult Add() {
 			//Movie m = new Movie("Shrek 2", 2004, 5.0f, null, "https://m.media-amazon.com/images/M/MV5BNjAyYjg2MzctNWM0NS00ODE4LTg4NTEtZWM4MDk5ZWVlODEyXkEyXkFqcGdeQXVyNjc0NTEzOTA@._V1_.jpg");
-			return View();
+			return View(/*m*/);
 		}
 
 		[HttpPost]
 		public IActionResult Add(Movie m) {
-			MovieList.Add(m);
-			return RedirectToAction("MultMovies", "Movie");
-			//return View();
+			// Custom validation
+			if(m.Title == "Cats") {
+				ModelState.AddModelError("Title", "You are degenerate scum if you think you can add that movie to MY database!");
+			}
+			if(ModelState.IsValid) {
+				MovieList.Add(m);
+				return RedirectToAction("MultMovies", "Movie");
+			} else {
+				return View();
+			}
 		}
 
 		[HttpGet] // Loading the edit page

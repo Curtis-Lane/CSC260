@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadForInputs", "MadForInput
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGameLibrary", "VideoGameLibrary\VideoGameLibrary.csproj", "{1D8AA07C-395C-4CAD-8BFB-65DD6A52537F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Routing", "Routing\Routing.csproj", "{6490A643-B497-4E83-8A78-CB420EEA0524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Routing", "Routing\Routing.csproj", "{6490A643-B497-4E83-8A78-CB420EEA0524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "Validation\Validation.csproj", "{25F039A9-077E-4721-8D95-D22486B66875}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesDAL", "MoviesDAL\MoviesDAL.csproj", "{3396B57B-074A-4636-9C42-AC5F55B15779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{6490A643-B497-4E83-8A78-CB420EEA0524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6490A643-B497-4E83-8A78-CB420EEA0524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6490A643-B497-4E83-8A78-CB420EEA0524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25F039A9-077E-4721-8D95-D22486B66875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25F039A9-077E-4721-8D95-D22486B66875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25F039A9-077E-4721-8D95-D22486B66875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25F039A9-077E-4721-8D95-D22486B66875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3396B57B-074A-4636-9C42-AC5F55B15779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3396B57B-074A-4636-9C42-AC5F55B15779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3396B57B-074A-4636-9C42-AC5F55B15779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3396B57B-074A-4636-9C42-AC5F55B15779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
