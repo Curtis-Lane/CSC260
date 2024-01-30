@@ -11,6 +11,12 @@
 } else {
 	<h2>Total movie count: @Model.Count()</h2>
 	<h4>@TempData["Success"]</h4>
+
+	<form class="d-flex" asp-controller="Movie" asp-action="Search" method="post">
+		<input name="key" type="search" placeholder="Title" class="form-control me-2" />
+		<button type="submit" class="btn btn-secondary my-2">Search</button>
+	</form>
+
 	<div class="row">
 		@foreach(Movie movie in Model) {
 			<div class="col-4">

@@ -14,8 +14,8 @@ namespace Movies.Controllers {
 		// Use a redirect for the loan function's return value that points back to the current page
 
 		public IActionResult DisplayMovie() {
-			Movie m = new Movie("Tron", 1982, 4.7f, null, "https://m.media-amazon.com/images/M/MV5BZjgxYzk3NjItNDliMC00YzE5LWEzZDQtZjJjZWUyNjE2MGFkXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_FMjpg_UX1000_.jpg");
-			return View(m);
+			//Movie m = new Movie("Tron", 1982, 4.7f, null, "https://m.media-amazon.com/images/M/MV5BZjgxYzk3NjItNDliMC00YzE5LWEzZDQtZjJjZWUyNjE2MGFkXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_FMjpg_UX1000_.jpg");
+			return View(dal.GetMovies().Last());
 		}
 
 		public IActionResult MultMovies() {
@@ -105,6 +105,15 @@ namespace Movies.Controllers {
 				TempData["Success"] = "Failed to delete movie \"" + m.Title + "\"";
 			}
 			return RedirectToAction("MultMovies", "Movie");
+		}
+
+		[HttpPost]
+		public IActionResult Search(string? key) {
+			if(string.IsNullOrEmpty(key)) {
+				return RedirectToAction("MultMovies", "Movie");
+			} else {
+				return View("MultMovies", dal.SearchForMovies(key));
+			}
 		}
 	}
 }

@@ -1,0 +1,41 @@
+﻿@{
+	ViewData["Title"] = "Add Game";
+}
+
+@model VideoGame
+
+<form asp-controller="Game" asp-action="Add" method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Add Game</h2>
+			<hr />
+			<br />
+			<div asp-validation-summary="All" class="text-danger"></div>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Title"></label>
+			<input asp-for="Title" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Platform"></label>
+			<input asp-for="Platform" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Genre"></label>
+			<input asp-for="Genre" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="ESRBRating"></label>
+			<input asp-for="ESRBRating" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Year"></label>
+			<input asp-for="Year" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Image"></label>
+			<input asp-for="Image" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary">Add</button>
+	</div>
+</form>

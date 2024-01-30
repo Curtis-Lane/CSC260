@@ -10,6 +10,18 @@
 	<h2>No games in collection</h2>
 } else {
 	<h2>Total collection size: @Model.Count()</h2>
+
+	<a asp-area="" asp-controller="Game" asp-action="Add" class="btn btn-secondary">Add Game</a>
+
+	<br />
+
+	<form class="d-flex" asp-controller="Game" asp-action="Search" method="post">
+		<input name="key" type="search" placeholder="Title" class="form-control me-2" />
+		<button type="submit" class="btn btn-secondary my-2">Search</button>
+	</form>
+
+	<br />
+
 	<div class="row">
 		@foreach(VideoGame game in Model) {
 			<div class="col-4 pb-3">

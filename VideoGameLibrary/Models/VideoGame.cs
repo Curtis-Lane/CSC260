@@ -1,18 +1,27 @@
-﻿namespace VideoGameLibrary.Models {
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VideoGameLibrary.Models {
 	public class VideoGame {
 		private static int nextID = 1;
 		public int ID {get; set;} = nextID++;
 
+		[Required(ErrorMessage = "The game's title is a required field!")]
 		public string Title {get; set;}
 
+		[Required(ErrorMessage = "The game's platform is a required field!")]
 		public string Platform {get; set;}
 
+		[Required(ErrorMessage = "The game's genre is a required field!")]
 		public string Genre {get; set;}
 
+		[Required(ErrorMessage = "The game's ESRB rating is a required field!")]
 		public string ESRBRating {get; set;}
 
-		public int Year {get; set;}
+		[Required(ErrorMessage = "The game's year is a required field!")]
+		[Range(1970, int.MaxValue, ErrorMessage = "I'm pretty sure video games didn't exist before 1970!")]
+		public int? Year {get; set;}
 
+		[Required(ErrorMessage = "A link to the game's cover image is required!")]
 		public string Image {get; set;}
 
 		public string? LoanedTo {get; set;} = null;

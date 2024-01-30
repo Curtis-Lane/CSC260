@@ -37,4 +37,16 @@
 			</div>
 		</div>
 	}
+	<div class="row pt-3">
+		<div class="col-6">
+			<a asp-controller="Game" asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-secondary mx-2">
+				<i class="bi bi-wrench"></i> Edit
+			</a>
+		</div>
+		<div class="col-6">
+			<a asp-controller="Game" asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-secondary mx-2">
+				<i class="bi bi-trash"></i> Delete
+			</a>
+		</div>
+	</div>
 </div>
