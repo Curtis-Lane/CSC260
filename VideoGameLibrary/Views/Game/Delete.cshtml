@@ -1,0 +1,31 @@
+﻿@{
+	ViewData["Title"] = "Delete Game";
+}
+
+@model VideoGame
+
+<div class="border p-3 mt-4">
+	<h3>@Model.Title</h3>
+	<img src="@Model.Image" width="250" />
+	<br />
+	<div class="row">
+		<h3>Are you sure you want to delete this game?</h3>
+	</div>
+	<form asp-controller="Game" asp-action="Delete" method="post">
+		<input hidden asp-for="ID" />
+		<input hidden asp-for="Title" />
+		<input hidden asp-for="Platform" />
+		<input hidden asp-for="Genre" />
+		<input hidden asp-for="ESRBRating" />
+		<input hidden asp-for="Year" />
+		<input hidden asp-for="Image" />
+
+		<button type="submit" class="btn btn-danger">
+			Delete
+		</button>
+		<a asp-area="" asp-controller="Game" asp-action="Collection" class="btn btn-secondary">Cancel</a>
+	</form>
+	<div name="lblMsg" class="text-danger">
+		@ViewData["Error"]
+	</div>
+</div>

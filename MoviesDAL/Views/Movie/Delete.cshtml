@@ -26,11 +26,12 @@
 			</form>
 		</div>
 		<div class="col-6">
-			<form asp-controller="Movie" asp-action="MultMovies">
+			@* <form asp-controller="Movie" asp-action="MultMovies">
 				<button type="submit" class="btn btn-primary">
 					Cancel
 				</button>
-			</form>
+			</form> *@
+			<a asp-area="" asp-controller="Movie" asp-action="MultMovies" class="btn btn-secondary">Cancel</a>
 		</div>
 	</div>
 	<div name="lblMsg" class="text-danger">

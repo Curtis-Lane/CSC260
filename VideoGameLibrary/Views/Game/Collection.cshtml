@@ -11,9 +11,13 @@
 } else {
 	<h2>Total collection size: @Model.Count()</h2>
 
-	<a asp-area="" asp-controller="Game" asp-action="Add" class="btn btn-secondary">Add Game</a>
+	<div class="pb-3">
+		<a asp-area="" asp-controller="Game" asp-action="Add" class="btn btn-secondary d-flex">Add Game</a>
+	</div>
 
-	<br />
+	@if(TempData["Success"] != null) {
+		<h4 class="py-2">@TempData["Success"]</h4>
+	}
 
 	<form class="d-flex" asp-controller="Game" asp-action="Search" method="post">
 		<input name="key" type="search" placeholder="Title" class="form-control me-2" />

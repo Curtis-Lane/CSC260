@@ -36,6 +36,9 @@
 			<label asp-for="Image"></label>
 			<input asp-for="Image" class="form-control" />
 		</div>
-		<button type="submit" class="btn btn-primary">Add</button>
+		<div>
+			<button type="submit" class="btn btn-primary">Add</button>
+			<a asp-area="" asp-controller="Game" asp-action="Collection" class="btn btn-secondary">Cancel</a>
+		</div>
 	</div>
 </form>

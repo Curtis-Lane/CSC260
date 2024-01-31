@@ -19,8 +19,12 @@ namespace VideoGameLibrary.Data {
 			return GameCollection.Where(g => g.Title.ToLower().Contains(key.ToLower()));
 		}
 
+		public VideoGame? GetGame(int ID) {
+			return GameCollection.Find(g => g.ID == ID);
+		}
+
 		public void RentGame(int ID, string? LoanedTo) {
-			VideoGame videoGame = GameCollection.Find(g => g.ID == ID);
+			VideoGame videoGame = GetGame(ID);
 			if(string.IsNullOrEmpty(LoanedTo)) {
 				videoGame.LoanedTo = null;
 				videoGame.LoanDate = null;
@@ -45,7 +49,7 @@ namespace VideoGameLibrary.Data {
 		}
 
 		public bool DeleteGame(int ID) {
-			VideoGame? game = GameCollection.Find(g => g.ID == ID);
+			VideoGame? game = GetGame(ID);
 			if(game == null) {
 				return false;
 			} else {
