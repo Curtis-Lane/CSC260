@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VideoGameLibrary.Data;
 using VideoGameLibrary.Interfaces;
 using VideoGameLibrary.Models;
 
 namespace VideoGameLibrary.Controllers {
 	public class GameController : Controller {
-		IDataAccessLayer dal = new GameCollectionDAL();
+		IDataAccessLayer dal;
+
+		public GameController(IDataAccessLayer dal) {
+			this.dal = dal;
+		}
 
 		[HttpGet]
 		public IActionResult Collection() {
