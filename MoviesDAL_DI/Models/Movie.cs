@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace Movies.Models {
 	[EightiesMovieRatings]
 	public class Movie {
-		//private static int nextID = 0;
+		// Primary key, also auto-increments
+		[Key]
 		public int ID {get; set;}
 
 		[Required(ErrorMessage = "Movie Title is required, dummy")]
@@ -14,6 +15,7 @@ namespace Movies.Models {
 		[Required]
 		public int? Year {get; set;}
 
+		[Required]
 		[Range(0.0f, 5.0f, ErrorMessage = "Rating is out of bounds")]
 		public float? Rating {get; set;}
 

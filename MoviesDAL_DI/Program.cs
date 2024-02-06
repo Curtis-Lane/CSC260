@@ -1,6 +1,7 @@
 using MoviesDAL.Interfaces;
 using MoviesDAL.Data;
 using MoviesDAL_DI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Movies {
 	public class Program {
@@ -9,6 +10,9 @@ namespace Movies {
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			//
+			builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 			// Send in DAL as dependency
 			// Transient = Creates new object each time service is requested
