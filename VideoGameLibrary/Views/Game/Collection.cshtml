@@ -8,6 +8,20 @@
 
 @if(Model == null || Model.Count() == 0) {
 	<h2>No games in collection</h2>
+
+	<form class="d-flex" asp-controller="Game" asp-action="Search" method="post">
+		<input name="key" type="search" placeholder="Title" class="form-control me-2" />
+		<button type="submit" class="btn btn-secondary my-2">Search</button>
+	</form>
+
+	<br />
+
+	<form asp-controller="Game" asp-action="Filter" method="post">
+		<input name="Genre" placeholder="Genre" />
+		<input name="Platform" placeholder="Platform" />
+		<input name="ESRBRating" placeholder="ESRBRating" />
+		<button type="submit" class="btn btn-secondary">Filter</button>
+	</form>
 } else {
 	<h2>Total collection size: @Model.Count()</h2>
 
@@ -22,6 +36,15 @@
 	<form class="d-flex" asp-controller="Game" asp-action="Search" method="post">
 		<input name="key" type="search" placeholder="Title" class="form-control me-2" />
 		<button type="submit" class="btn btn-secondary my-2">Search</button>
+	</form>
+
+	<br />
+
+	<form asp-controller="Game" asp-action="Filter" method="post">
+		<input name="Genre" placeholder="Genre" />
+		<input name="Platform" placeholder="Platform" />
+		<input name="ESRBRating" placeholder="ESRBRating" />
+		<button type="submit" class="btn btn-secondary">Filter</button>
 	</form>
 
 	<br />

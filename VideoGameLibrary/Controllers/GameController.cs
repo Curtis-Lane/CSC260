@@ -94,7 +94,22 @@ namespace VideoGameLibrary.Controllers {
 			if(string.IsNullOrEmpty(key)) {
 				return RedirectToAction("Collection", "Game");
 			} else {
-				return View("Collection", dal.SearchForGames(key));
+				IEnumerable<VideoGame> foundGames = dal.SearchForGames(key);
+				if(foundGames == dal.GetCollection()) {
+					return RedirectToAction("Collection", "Game");
+				} else {
+					return View("Collection", foundGames);
+				}
+			}
+		}
+
+		[HttpPost]
+		public IActionResult Filter(string Genre, string Platform, string ESRBRating) {
+			IEnumerable<VideoGame> foundGames = dal.FilterCollection(Genre, Platform, ESRBRating);
+			if(foundGames == dal.GetCollection()) {
+				return RedirectToAction("Collection", "Game");
+			} else {
+				return View("Collection", foundGames);
 			}
 		}
 	}

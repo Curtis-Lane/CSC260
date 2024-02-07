@@ -27,7 +27,27 @@ namespace VideoGameLibrary.Data {
 		}
 
 		public IEnumerable<VideoGame> FilterCollection(string? Genre = null, string? Platform = null, string? ESRBRating = null) {
-			throw new NotImplementedException();
+			if(Genre == null) {
+				Genre = string.Empty;
+			}
+			if(Platform == null) {
+				Platform = string.Empty;
+			}
+			if(ESRBRating == null) {
+				ESRBRating = string.Empty;
+			}
+
+			if(Genre == string.Empty && Platform == string.Empty && ESRBRating == string.Empty) {
+				return GetCollection();
+			}
+
+			IEnumerable<VideoGame> lstGamesByGenre = GetCollection().Where(g => (!string.IsNullOrEmpty(g.Genre) && g.Genre.ToLower().Contains(Genre.ToLower()))).ToList();
+
+			IEnumerable<VideoGame> lstGamesByPlatform = GetCollection().Where(g => (!string.IsNullOrEmpty(g.Platform) && g.Platform.ToLower().Contains(Platform.ToLower()))).ToList();
+
+			IEnumerable<VideoGame> lstGamesByESRB = GetCollection().Where(g => (!string.IsNullOrEmpty(g.ESRBRating) && g.ESRBRating.ToLower().Contains(ESRBRating.ToLower()))).ToList();
+
+			return lstGamesByGenre.Intersect(lstGamesByPlatform).Intersect(lstGamesByESRB);
 		}
 
 		public VideoGame? GetGame(int ID) {
