@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MoviesDAL_DI.Data;
+using VideoGameLibrary.Data;
 
 #nullable disable
 
-namespace MoviesDAL_DI.Migrations
+namespace VideoGameLibrary.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(VideoGameDBContext))]
+    [Migration("20240207190435_Make the database")]
+    partial class Makethedatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace MoviesDAL_DI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Movies.Models.Movie", b =>
+            modelBuilder.Entity("VideoGameLibrary.Models.VideoGame", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -30,27 +32,31 @@ namespace MoviesDAL_DI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<string>("ESRBRating")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MPAARating")
+                    b.Property<DateTime?>("LoanDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoanedTo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float?>("Rating")
+                    b.Property<string>("Platform")
                         .IsRequired()
-                        .HasColumnType("real");
-
-                    b.Property<DateTime?>("ReleaseDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(213)
-                        .HasColumnType("nvarchar(213)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Year")
                         .IsRequired()
@@ -58,7 +64,7 @@ namespace MoviesDAL_DI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Movies");
+                    b.ToTable("VideoGames");
                 });
 #pragma warning restore 612, 618
         }

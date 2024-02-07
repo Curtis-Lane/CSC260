@@ -6,6 +6,8 @@ namespace MoviesDAL.Interfaces {
 
 		IEnumerable<Movie> SearchForMovies(string key);
 
+		IEnumerable<Movie> FilterMovies(string MPAARating, string Genre);
+
 		Movie? GetMovie(int ID);
 
 		void AddMovie(Movie movie);

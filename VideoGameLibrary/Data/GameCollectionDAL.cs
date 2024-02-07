@@ -11,12 +11,23 @@ namespace VideoGameLibrary.Data {
 			new VideoGame("Grand Theft Auto V", "PC, Xbox Series, Playstation 5", "FPS", "M", 2013, "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png")
 		};
 
+		public GameCollectionDAL() {
+			int id = 0;
+			foreach(VideoGame videoGame in GameCollection) {
+				videoGame.ID = id++;
+			}
+		}
+
 		public IEnumerable<VideoGame> GetCollection() {
 			return GameCollection;
 		}
 
 		public IEnumerable<VideoGame> SearchForGames(string key) {
 			return GameCollection.Where(g => g.Title.ToLower().Contains(key.ToLower()));
+		}
+
+		public IEnumerable<VideoGame> FilterCollection(string? Genre = null, string? Platform = null, string? ESRBRating = null) {
+			throw new NotImplementedException();
 		}
 
 		public VideoGame? GetGame(int ID) {

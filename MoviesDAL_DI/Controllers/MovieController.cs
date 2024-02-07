@@ -120,5 +120,10 @@ namespace Movies.Controllers {
 				return View("MultMovies", dal.SearchForMovies(key));
 			}
 		}
+
+		[HttpPost]
+		public IActionResult Filter(string MPAARating, string Genre) {
+			return View("MultMovies", dal.FilterMovies(MPAARating, Genre));
+		}
 	}
 }

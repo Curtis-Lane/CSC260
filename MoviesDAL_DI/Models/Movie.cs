@@ -24,17 +24,23 @@ namespace Movies.Models {
 		[Required]
 		public string Image {get; set;}
 
+		public string? MPAARating {get; set;}
+
+		public string? Genre {get; set;}
+
 		#pragma warning disable CS8618
 		// ALWAYS NEEDED (For MVC)
 		public Movie() {;}
 		#pragma warning restore CS8618
 
-		public Movie(string Title, int? Year, float? Rating, DateTime? ReleaseDate, string Image) {
+		public Movie(string Title, int? Year, float? Rating, DateTime? ReleaseDate, string Image, string? MPAARating, string? Genre) {
 			this.Title = Title;
 			this.Year = Year;
 			this.Rating = Rating;
 			this.ReleaseDate = ReleaseDate;
 			this.Image = Image;
+			this.MPAARating = MPAARating;
+			this.Genre = Genre;
 		}
 	}
 }

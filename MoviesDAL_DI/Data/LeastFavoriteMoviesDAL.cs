@@ -25,6 +25,31 @@ namespace MoviesDAL_DI.Data {
 			return db.Movies.Where(m => m.Title.ToLower().Contains(key.ToLower()));
 		}
 
+		public IEnumerable<Movie> FilterMovies(string? MPAARating, string? Genre) {
+			if(Genre == null) {
+				Genre = string.Empty;
+			}
+			if(MPAARating == null) {
+				MPAARating = string.Empty;
+			}
+
+			if(Genre == string.Empty && MPAARating == string.Empty) {
+				return GetMovies();
+			}
+
+			IEnumerable<Movie> lstMoviesByGenre = GetMovies().Where(m => (!string.IsNullOrEmpty(m.Genre) && m.Genre.ToLower().Contains(Genre.ToLower()))).ToList();
+
+			IEnumerable<Movie> lstMoviesByMPAA = GetMovies().Where(m => (!string.IsNullOrEmpty(m.MPAARating) && m.MPAARating.ToLower().Contains(MPAARating.ToLower()))).ToList();
+
+			return lstMoviesByGenre.Intersect(lstMoviesByMPAA);
+
+			//if(lstMoviesByMPAA.Count() == 0) {
+			//	return lstMoviesByGenre;
+			//} else {
+			//	return lstMoviesByMPAA;
+			//}
+		}
+
 		public Movie? GetMovie(int ID) {
 			//return MovieList.Find(m => m.ID == ID);
 			return db.Movies.Find(ID);

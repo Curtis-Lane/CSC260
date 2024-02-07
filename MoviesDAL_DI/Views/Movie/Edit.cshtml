@@ -26,6 +26,15 @@
 			<label asp-for="Image"></label>
 			<input asp-for="Image" class="form-control" />
 		</div>
+		<div class="mb-3">
+			<label asp-for="MPAARating"></label>
+			<input asp-for="MPAARating" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Genre"></label>
+			<input asp-for="Genre" class="form-control" />
+		</div>
+
 		<input hidden asp-for="ID" value="@Model.ID" />
 
 		<button type="submit" class="btn btn-primary">

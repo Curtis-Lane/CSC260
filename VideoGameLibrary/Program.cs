@@ -1,5 +1,6 @@
 using VideoGameLibrary.Data;
 using VideoGameLibrary.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace VideoGameLibrary {
     public class Program {
@@ -9,8 +10,11 @@ namespace VideoGameLibrary {
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+			// Send in DB Context as dependency
+			builder.Services.AddDbContext<VideoGameDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 			// Send in DAL as dependency
-			builder.Services.AddTransient<IDataAccessLayer, GameCollectionDAL>();
+			builder.Services.AddTransient<IDataAccessLayer, VideoGameDBDal>();
 
             var app = builder.Build();
 

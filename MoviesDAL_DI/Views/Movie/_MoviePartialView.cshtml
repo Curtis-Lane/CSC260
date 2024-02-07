@@ -1,4 +1,5 @@
 ﻿@{
+	//
 }
 
 @model Movie
@@ -10,6 +11,8 @@
 		<h3>@Model.Title</h3>
 		<h3>@Model.Year</h3>
 		<h3>@Model.Rating</h3>
+		<h3>@Model.MPAARating</h3>
+		<h3>@Model.Genre</h3>
 		<img src="@Model.Image" width="250" />
 
 		@if(Model.ReleaseDate.HasValue) {

@@ -2,8 +2,7 @@
 
 namespace VideoGameLibrary.Models {
 	public class VideoGame {
-		private static int nextID = 1;
-		public int ID {get; set;} = nextID++;
+		public int ID {get; set;}
 
 		[Required(ErrorMessage = "The game's title is a required field!")]
 		public string Title {get; set;}

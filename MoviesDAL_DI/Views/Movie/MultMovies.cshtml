@@ -16,6 +16,11 @@
 		<input name="key" type="search" placeholder="Title" class="form-control me-2" />
 		<button type="submit" class="btn btn-secondary my-2">Search</button>
 	</form>
+	<form asp-controller="Movie" asp-action="Filter" method="post">
+		<input name="MPAARating" placeholder="MPAA Rating" />
+		<input name="Genre" placeholder="Genre" />
+		<button type="submit" class="btn btn-secondary">Filter</button>
+	</form>
 
 	<div class="row">
 		@foreach(Movie movie in Model) {

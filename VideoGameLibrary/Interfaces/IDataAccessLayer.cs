@@ -6,6 +6,8 @@ namespace VideoGameLibrary.Interfaces {
 
 		IEnumerable<VideoGame> SearchForGames(string key);
 
+		IEnumerable<VideoGame> FilterCollection(string? Genre = null, string? Platform = null, string? ESRBRating = null);
+
 		VideoGame? GetGame(int ID);
 
 		void RentGame(int ID, string? LoanedTo);
