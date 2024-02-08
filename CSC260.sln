@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesDAL", "MoviesDAL\Movi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesDAL_DI", "MoviesDAL_DI\MoviesDAL_DI.csproj", "{01F42761-82B9-473A-9A1E-09878DF8EA7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDNewProject", "IDNewProject\IDNewProject.csproj", "{B2EB8DFB-3CAB-4C1C-980C-230EE48F07D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{01F42761-82B9-473A-9A1E-09878DF8EA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01F42761-82B9-473A-9A1E-09878DF8EA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01F42761-82B9-473A-9A1E-09878DF8EA7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2EB8DFB-3CAB-4C1C-980C-230EE48F07D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2EB8DFB-3CAB-4C1C-980C-230EE48F07D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2EB8DFB-3CAB-4C1C-980C-230EE48F07D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2EB8DFB-3CAB-4C1C-980C-230EE48F07D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
