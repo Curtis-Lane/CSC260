@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace IDNewProject.Controllers {
 	public class HomeController : Controller {
@@ -15,8 +16,11 @@ namespace IDNewProject.Controllers {
 			return View();
 		}
 
-		[Authorize]
+		[Authorize] // Can be used on methods or classes
 		public IActionResult Privacy() {
+			//ViewBag.ID = User.FindFirstValue(ClaimTypes.Name); // Username
+			//ViewBag.ID = User.FindFirstValue(ClaimTypes.Email); // Email
+			ViewBag.ID = User.FindFirstValue(ClaimTypes.NameIdentifier); // UserID
 			return View();
 		}
 

@@ -2,6 +2,7 @@
 
 namespace VideoGameLibrary.Models {
 	public class VideoGame {
+		[Key]
 		public int ID {get; set;}
 
 		[Required(ErrorMessage = "The game's title is a required field!")]
