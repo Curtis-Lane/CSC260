@@ -1,0 +1,17 @@
+﻿@using MoviesScaffoldID.Models
+
+@{
+	//
+}
+
+@model Movie
+
+@* @if(Model == null) {
+	<h2>No movie provided</h2>
+} else {
+	<h3>@Model.Title</h3>
+	<h3>@Model.Year</h3>
+	<h3>@Model.Rating</h3>
+} *@
+
+<partial name="_MoviePartialView.cshtml" for="@Model" />

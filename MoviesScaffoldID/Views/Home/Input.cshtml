@@ -1,0 +1,24 @@
+﻿@{
+	//
+}
+
+<h1>@ViewData["Title"]</h1>
+<form asp-controller="Home" asp-action="Output" method="post">
+	<div class="row">
+		<div class="col-12">
+			<label for="FirstName">First Name</label>
+			<input id="FirstName" type="text" name="FirstName" placeholder="First Name" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<label for="LastName">Last Name</label>
+			<input id="LastName" type="text" name="LastName" placeholder="Last Name" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+</form>

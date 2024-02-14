@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Send 3 Ways";
+}
+<h1>@ViewData["Title"]</h1>
+
+@* Form Parameters example *@
+<form asp-controller="Home" asp-action="TestDisplay" method="post">
+    <input hidden type="text" name="id" value="66" />
+    <input type="text" name="title" />
+    <input type="text" name="message" />
+    <button type="submit">Submit Form</button>
+</form>
+
+@* ASP-Route example *@
+<a asp-controller="Home" asp-action="TestDisplay" asp-route-id="66" asp-route-title="Route Test" asp-route-message="This is using routing!">Send with Route</a>
+<br />
+
+@* Query Parameter example *@
+<a href="~/Home/TestDisplay?id=66&title=Query%20Test&message=This%20is%20using%20queries!">Send with Query</a>
