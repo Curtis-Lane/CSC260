@@ -1,8 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a asp-area="" asp-controller="SocialMedia" asp-action="AboutCreator">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome to Anime Sharing Hub™!</h1>
+	<img src="img/logo.png" width="190" />
+	<p>
+		ようこそ! (Welcome!)
+	</p>
+	<p>
+		This site exists as a way to both discuss and share pictures about anime. <br />
+		Feel free to start chatting away, or share some pics and have a discussion! <br />
+		You can do whatever you want! (within reason)
+	</p>
+	@if(!SignInManager.IsSignedIn(User)) {
+		<p>
+			I can see that you're not signed in, if you want to register a new account, 
+			<a href="~/Identity/Account/Register">click here</a>, and if you just need to login,
+			<a href="~/Identity/Account/Login">click here</a>.
+		</p>
+	}
 </div>

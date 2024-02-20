@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialMediaSite.Data;
+using SocialMediaSite.Interfaces;
 
 namespace SocialMediaSite {
 	public class Program {
@@ -15,6 +16,31 @@ namespace SocialMediaSite {
 
 			builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			builder.Services.AddTransient<IDataAccessLayer, SocialMediaDAL>();
+
+			builder.Services.Configure<IdentityOptions>(options => {
+				// Password settingsw
+				options.Password.RequireDigit = false;
+				options.Password.RequireLowercase = true;
+				options.Password.RequireUppercase = true;
+				options.Password.RequiredLength = 10;
+				options.Password.RequiredUniqueChars = 0; // Number of non-alphanumeric characters required
+				// Why doesn't this last one work?
+				
+				// Lockout
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+				options.Lockout.MaxFailedAccessAttempts = 5;
+				options.Lockout.AllowedForNewUsers = false;
+
+				// User
+				options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
+				options.User.RequireUniqueEmail = true;
+				options.SignIn.RequireConfirmedAccount = false;
+				options.SignIn.RequireConfirmedEmail = false;
+				options.SignIn.RequireConfirmedPhoneNumber = false;
+			});
+
 			builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
@@ -39,6 +65,12 @@ namespace SocialMediaSite {
 			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}"
+			);
+
+			app.MapControllerRoute(
+				name: "UserProfile",
+				pattern: "/Profile/{profileUsername}",
+				defaults: new {controller = "SocialMedia", action = "UserProfile"}
 			);
 
 			app.MapControllerRoute(
