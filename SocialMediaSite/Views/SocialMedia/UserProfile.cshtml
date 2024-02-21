@@ -1,5 +1,42 @@
 ﻿@{
-	//
+	ViewData["Title"] = "You are viewing the page for " + Model.profile.Name;
 }
 
-//
+@model (Profile profile, bool isCurrentUser)
+
+<div class="border mt-3">
+	<div class="row">
+		<div class="col-3">
+			<img src="@Model.profile.ProfilePicture" width="250" height="250" />
+			<form asp-controller="SocialMedia" asp-action="ViewImages" method="post">
+				<input hidden asp-for="profile.ID" name="profileID" />
+				<button type="submit" class="btn btn-primary">View Additional Images</button>
+			</form>
+		</div>
+		<div class="col-9">
+			<h2>About Me</h2>
+			<ul>
+				<li>
+					My name is @Model.profile.Name
+				</li>
+				<li>
+					My favorite anime is @Model.profile.FavAnime
+				</li>
+				<li>
+					My favorite anime episode is @Model.profile.FavAnimeEpisode
+				</li>
+				<li>
+					My least favorite anime is @Model.profile.LeastFavAnime
+				</li>
+			</ul>
+			@if(Model.isCurrentUser) {
+				<a asp-area="" asp-controller="SocialMedia" asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
+			}
+		</div>
+	</div>
+	<form asp-controller="SocialMedia" asp-action="UserProfile" method="post" class="d-flex my-3">
+		<input type="text" name="Message" class="form-control" />
+		<button type="submit" class="btn btn-secondary">Add Post</button>
+	</form>
+	@* foreach loop here when I get posts sorted out *@
+</div>

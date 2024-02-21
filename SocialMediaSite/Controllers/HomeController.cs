@@ -18,9 +18,13 @@ namespace SocialMediaSite.Controllers {
 			this.dal = dal;
 		}
 
-		public IActionResult Index() {
+		public ActionResult Index() {
+			return View();
+		}
+
+		public IActionResult Landing() {
 			if(GetCurrentUserID() == null) {
-				return View();
+				return View("Index"); // Might not be what he wants
 			} else {
 				return Redirect("~/Profile/" + dal.getUserFromID(GetCurrentUserID()));
 			}

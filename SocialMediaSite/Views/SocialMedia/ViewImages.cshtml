@@ -1,0 +1,14 @@
+﻿@{
+	ViewData["Title"] = "You currently viewing images posted by " + Model.prevProfileName;
+}
+
+@model (IEnumerable<Image> images, string prevProfileName)
+
+<a href="~/Profile/@Model.prevProfileName" class="btn btn-primary mt-3">Go Back</a>
+<div class="row">
+	<div class="col-4">
+		@foreach(Image image in Model.images) {
+			<partial name="_ImagePartialView.cshtml" for="@image" />
+		}
+	</div>
+</div>

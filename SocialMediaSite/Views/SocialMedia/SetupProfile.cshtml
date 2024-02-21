@@ -2,4 +2,41 @@
 	ViewData["Title"] = "Finishing steps";
 }
 
-//
+@model Profile
+
+<form asp-controller="SocialMedia" asp-action="SetupProfile" method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Setup Profile</h2>
+			<hr />
+			<br />
+			@* <div asp-validation-summary="All" class="text-danger"></div> *@
+		</div>
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="ProfilePicture"></label>
+			<input asp-for="ProfilePicture" class="form-control" />
+			<span asp-validation-for="ProfilePicture" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="FavAnime"></label>
+			<input asp-for="FavAnime" class="form-control" />
+			<span asp-validation-for="FavAnime" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="FavAnimeEpisode"></label>
+			<input asp-for="FavAnimeEpisode" class="form-control" />
+			<span asp-validation-for="FavAnimeEpisode" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LeastFavAnime"></label>
+			<input asp-for="LeastFavAnime" class="form-control" />
+			<span asp-validation-for="LeastFavAnime" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary">Add</button>
+	</div>
+</form>

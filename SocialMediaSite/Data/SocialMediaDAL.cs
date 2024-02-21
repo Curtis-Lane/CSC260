@@ -15,8 +15,34 @@ namespace SocialMediaSite.Data {
 			db.SaveChanges();
 		}
 
+		public Profile getProfileFromUser(string ID) {
+			return db.Profiles.Where(p => p.UserID == ID).FirstOrDefault();
+		}
+
+		public Profile getProfileFromID(int ID) {
+			return db.Profiles.Where(p => p.ID == ID).FirstOrDefault();
+		}
+
+		public Profile getProfileFromUserName(string UserName) {
+			return db.Profiles.Where(p => p.UserID == getUserFromUserName(UserName).Id).FirstOrDefault();
+		}
+
+		public IdentityUser getUserFromUserName(string UserName) {
+			return db.Users.Where(u => u.UserName == UserName).FirstOrDefault();
+		}
+
 		public IdentityUser getUserFromID(string ID) {
 			return db.Users.Where(u => u.Id == ID).FirstOrDefault();
+		}
+
+		public IdentityUser getUserFromProfileID(int ID) {
+			Profile prof = getProfileFromID(ID);
+
+			return db.Users.Where(u => u.Id == prof.UserID).FirstOrDefault();
+		}
+
+		public IEnumerable<Image> getImagesFromProfileID(int ID) {
+			return db.Images.Where(i => i.ProfileID == ID);
 		}
 
 		public bool doesUserExist(string UserName) {
