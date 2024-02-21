@@ -15,6 +15,20 @@ namespace SocialMediaSite.Data {
 			db.SaveChanges();
 		}
 
+		public void updateProfile(Profile profile) {
+			db.Profiles.Update(profile);
+			db.SaveChanges();
+		}
+
+		public void addPost(Post post) {
+			db.Posts.Add(post);
+			db.SaveChanges();
+		}
+
+		public IEnumerable<Post> getPostsForProfile(int profileID) {
+			return db.Posts.Where(p => p.PostedOnID == profileID);
+		}
+
 		public Profile getProfileFromUser(string ID) {
 			return db.Profiles.Where(p => p.UserID == ID).FirstOrDefault();
 		}
@@ -39,6 +53,11 @@ namespace SocialMediaSite.Data {
 			Profile prof = getProfileFromID(ID);
 
 			return db.Users.Where(u => u.Id == prof.UserID).FirstOrDefault();
+		}
+
+		public void addImage(Image image) {
+			db.Images.Add(image);
+			db.SaveChanges();
 		}
 
 		public IEnumerable<Image> getImagesFromProfileID(int ID) {

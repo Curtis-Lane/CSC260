@@ -1,22 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SocialMediaSite.Models {
-	//public class Post {
-	//	[Key]
-	//	public int ID {get; set;}
+	public class Post {
+		[Key]
+		public int ID {get; set;}
 
-	//	[Required]
-	//	[MaxLength(150)]
-	//	public string Contents {get; set;}
+		[Required]
+		[MaxLength(150)]
+		public string Contents {get; set;}
 
-	//	[Required]
-	//	public int PosterID {get; set;}
-	//	[Required]
-	//	public virtual Profile Poster {get; set;}
+		[Required]
+		public int PosterID {get; set;}
 
-	//	[Required]
-	//	public int PostedOnID {get; set;}
-	//	[Required]
-	//	public virtual Profile PostedOn {get; set;}
-	//}
+		[Required]
+		public int PostedOnID {get; set;}
+	}
 }

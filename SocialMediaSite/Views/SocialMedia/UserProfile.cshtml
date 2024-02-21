@@ -2,13 +2,13 @@
 	ViewData["Title"] = "You are viewing the page for " + Model.profile.Name;
 }
 
-@model (Profile profile, bool isCurrentUser)
+@model (Profile profile, string userName, bool isCurrentUser, IEnumerable<Post> posts, IEnumerable<string> posterNames)
 
 <div class="border mt-3">
 	<div class="row">
 		<div class="col-3">
 			<img src="@Model.profile.ProfilePicture" width="250" height="250" />
-			<form asp-controller="SocialMedia" asp-action="ViewImages" method="post">
+			<form asp-controller="SocialMedia" asp-action="ViewImages" method="post" class="mt-2">
 				<input hidden asp-for="profile.ID" name="profileID" />
 				<button type="submit" class="btn btn-primary">View Additional Images</button>
 			</form>
@@ -30,13 +30,32 @@
 				</li>
 			</ul>
 			@if(Model.isCurrentUser) {
-				<a asp-area="" asp-controller="SocialMedia" asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
+				<form asp-controller="SocialMedia" asp-action="EditProfile" method="get">
+					<input hidden asp-for="@Model.profile.ID" name="profileID" />
+					<button type="submit" class="btn btn-primary">Edit Profile</button>
+				</form>
 			}
 		</div>
 	</div>
-	<form asp-controller="SocialMedia" asp-action="UserProfile" method="post" class="d-flex my-3">
-		<input type="text" name="Message" class="form-control" />
-		<button type="submit" class="btn btn-secondary">Add Post</button>
+	<form asp-controller="SocialMedia" asp-action="UserProfile" method="post" class="my-3">
+		<div class="row mx-2">
+			<input hidden asp-for="@Model.profile.ID" name="postedOnID" />
+			<input hidden type="text" name="userName" value="@Model.userName" />
+			<div class="col-10">
+				<input type="text" name="message" class="form-control" />
+			</div>
+			<div class="col-2">
+				<button type="submit" class="btn btn-secondary">Add Post</button>
+			</div>
+		</div>
 	</form>
 	@* foreach loop here when I get posts sorted out *@
+	@for(int i = 0; i < Model.posts.Count(); i++) {
+		<div class="border">
+			<a href="~/Profile/@Model.posterNames.ElementAt(i)">@Model.posterNames.ElementAt(i)</a>
+			<p>
+				@Model.posts.ElementAt(i).Contents
+			</p>
+		</div>
+	}
 </div>

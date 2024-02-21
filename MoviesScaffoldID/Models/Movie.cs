@@ -27,7 +27,9 @@ namespace MoviesScaffoldID.Models {
 		public string? MPAARating {get; set;}
 
 		public string? Genre {get; set;}
-
+		//public int? GenreID {get; set;}
+		//public Genre? Genre {get; set;}
+		
 		#pragma warning disable CS8618
 		// ALWAYS NEEDED (For MVC)
 		public Movie() {;}

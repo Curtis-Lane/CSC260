@@ -2,13 +2,30 @@
 	ViewData["Title"] = "You currently viewing images posted by " + Model.prevProfileName;
 }
 
-@model (IEnumerable<Image> images, string prevProfileName)
+@model (IEnumerable<Image> images, string prevProfileName, bool isCurrentUser, int profileID)
 
-<a href="~/Profile/@Model.prevProfileName" class="btn btn-primary mt-3">Go Back</a>
-<div class="row">
-	<div class="col-4">
-		@foreach(Image image in Model.images) {
-			<partial name="_ImagePartialView.cshtml" for="@image" />
-		}
+<div class="row mt-3">
+	<div class="col-3">
+		<a href="~/Profile/@Model.prevProfileName" class="btn btn-primary">Go Back</a>
 	</div>
+	@if(Model.isCurrentUser) {
+		<form asp-controller="SocialMedia" asp-action="AddImage" method="post" class="col-9">
+			<input hidden asp-for="@Model.profileID" name="profileID" />
+			<div class="row">
+				<div class="col-9">
+					<input type="text" name="imageURL" class="form-control" />
+				</div>
+				<div class="col-3">
+					<button type="submit" class="btn btn-primary">Add New Image</button>
+				</div>
+			</div>
+		</form>
+	}
+</div>
+<div class="row my-2">
+	@foreach(Image image in Model.images) {
+		<div class="col-3">
+			<partial name="_ImagePartialView.cshtml" for="@image" />
+		</div>
+	}
 </div>

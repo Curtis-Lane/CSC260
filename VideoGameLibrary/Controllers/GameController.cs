@@ -40,12 +40,12 @@ namespace VideoGameLibrary.Controllers {
 		[HttpGet]
 		public IActionResult Edit(int? id) {
 			if(id == null) {
-				ViewData["Error"] = "Movie id not found";
+				ViewData["Error"] = "Game id not found";
 				return View();
 			} else {
 				VideoGame? game = dal.GetGame((int) id);
 				if(game == null) {
-					ViewData["Error"] = "Cannot find movie with id " + id.ToString();
+					ViewData["Error"] = "Cannot find game with id " + id.ToString();
 				}
 				return View(game);
 			}

@@ -22,7 +22,15 @@ namespace SocialMediaSite.Controllers {
 			if(dal.doesUserExist(profileUsername)) {
 				Profile profile = dal.getProfileFromUserName(profileUsername);
 
-				return View("UserProfile", (profile, profile == dal.getProfileFromUser(GetCurrentUserID())));
+				IEnumerable<Post> postsForProfile = dal.getPostsForProfile(profile.ID);
+
+				IEnumerable<string> posterNames = new List<string>();
+				
+				//foreach(Post post in postsForProfile) {
+				//	((List<string>)posterNames).Add(dal.getUserFromProfileID(post.PosterID).UserName);
+				//} // TODO: can't use a for loop because lambdas are lazy
+
+				return View("UserProfile", (profile, profileUsername, profile == dal.getProfileFromUser(GetCurrentUserID()), postsForProfile, posterNames));
 			} else {
 				return View("UserDoesntExist");
 			}
@@ -30,8 +38,17 @@ namespace SocialMediaSite.Controllers {
 
 		[Authorize]
 		[HttpPost]
-		public IActionResult UserProfile() {
-			return View("UserProfile"); // TODO: When I get posts figured out
+		public IActionResult UserProfile(int postedOnID, string userName, string message) {
+			Post post = new Post();
+			post.Contents = message;
+			post.PosterID = dal.getProfileFromUser(GetCurrentUserID()).ID;
+			post.PostedOnID = postedOnID;
+
+			dal.addPost(post);
+
+			return Redirect("~/Profile/" + userName);
+
+			//return View("UserProfile"); // TODO: When I get posts figured out
 		}
 
 		[Authorize]
@@ -39,7 +56,20 @@ namespace SocialMediaSite.Controllers {
 		public IActionResult ViewImages(int profileID) {
 			string userName = dal.getUserFromProfileID(profileID).UserName;
 
-			return View("ViewImages", (dal.getImagesFromProfileID(profileID), userName));
+			return View("ViewImages", (dal.getImagesFromProfileID(profileID), userName, dal.getUserFromProfileID(profileID) == dal.getUserFromID(GetCurrentUserID()), profileID));
+		}
+
+		[Authorize]
+		[HttpPost]
+		public IActionResult AddImage(int profileID, string imageURL) {
+			Image image = new Image();
+			image.URL = imageURL;
+			image.ProfileID = profileID;
+			dal.addImage(image);
+
+			string userName = dal.getUserFromProfileID(profileID).UserName;
+
+			return View("ViewImages", (dal.getImagesFromProfileID(profileID), userName, dal.getUserFromProfileID(profileID) == dal.getUserFromID(GetCurrentUserID()), profileID));
 		}
 
 		[HttpGet]
@@ -54,19 +84,50 @@ namespace SocialMediaSite.Controllers {
 
 				dal.addProfile(profile);
 
-				//return Redirect("~/Profile/" + dal.getUserFromID(GetCurrentUserID()).UserName);
-				return RedirectToAction("UserProfile", dal.getUserFromID(GetCurrentUserID()).UserName);
+				return Redirect("~/Profile/" + dal.getUserFromID(GetCurrentUserID()).UserName);
 			} else {
-				return View();
+				return View(profile);
+			}
+		}
+
+		[Authorize]
+		[HttpGet]
+		public IActionResult EditProfile(int profileID) {
+			return View("EditProfile", dal.getProfileFromID(profileID));
+		}
+
+		[Authorize]
+		[HttpPost]
+		public IActionResult EditProfile(Profile profile) {
+			if(isProfileValid(profile)) {
+				dal.updateProfile(profile);
+
+				return Redirect("~/Profile/" + dal.getUserFromID(GetCurrentUserID()).UserName);
+			} else {
+				return View(profile);
 			}
 		}
 
 		private bool isProfileValid(Profile profile) {
-			if(profile.Name == null || profile.ProfilePicture == null || profile.FavAnime == null || profile.FavAnimeEpisode == null || profile.LeastFavAnime == null) {
-				return false;
-			} else {
-				return true;
+			ModelState.Clear();
+
+			if(profile.Name == null) {
+				ModelState.AddModelError("Name", "Name cannot be blank");
 			}
+			if(profile.ProfilePicture == null) {
+				ModelState.AddModelError("ProfilePicture", "The profile picture link cannot be blank");
+			}
+			if(profile.FavAnime == null) {
+				ModelState.AddModelError("FavAnime", "User must specify what their favorite anime is");
+			}
+			if(profile.FavAnimeEpisode == null) {
+				ModelState.AddModelError("FavAnimeEpisode", "User must specify what their favorite anime episode is");
+			}
+			if(profile.LeastFavAnime == null) {
+				ModelState.AddModelError("LeastFavAnime", "User must specify what their least favorite anime is");
+			}
+
+			return ModelState.IsValid;
 		}
 
 		private string GetCurrentUserID() {
