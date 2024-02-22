@@ -26,7 +26,7 @@ namespace SocialMediaSite.Data {
 		}
 
 		public IEnumerable<Post> getPostsForProfile(int profileID) {
-			return db.Posts.Where(p => p.PostedOnID == profileID);
+			return db.Posts.Where(p => p.PostedOnID == profileID).ToList();
 		}
 
 		public Profile getProfileFromUser(string ID) {
@@ -50,9 +50,7 @@ namespace SocialMediaSite.Data {
 		}
 
 		public IdentityUser getUserFromProfileID(int ID) {
-			Profile prof = getProfileFromID(ID);
-
-			return db.Users.Where(u => u.Id == prof.UserID).FirstOrDefault();
+			return db.Users.Where(u => u.Id == getProfileFromID(ID).UserID).FirstOrDefault();
 		}
 
 		public void addImage(Image image) {

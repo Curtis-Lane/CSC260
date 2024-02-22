@@ -25,10 +25,10 @@ namespace SocialMediaSite.Controllers {
 				IEnumerable<Post> postsForProfile = dal.getPostsForProfile(profile.ID);
 
 				IEnumerable<string> posterNames = new List<string>();
-				
-				//foreach(Post post in postsForProfile) {
-				//	((List<string>)posterNames).Add(dal.getUserFromProfileID(post.PosterID).UserName);
-				//} // TODO: can't use a for loop because lambdas are lazy
+
+				foreach(Post post in postsForProfile) {
+					((List<string>) posterNames).Add(dal.getUserFromProfileID(post.PosterID).UserName);
+				}
 
 				return View("UserProfile", (profile, profileUsername, profile == dal.getProfileFromUser(GetCurrentUserID()), postsForProfile, posterNames));
 			} else {
@@ -47,8 +47,6 @@ namespace SocialMediaSite.Controllers {
 			dal.addPost(post);
 
 			return Redirect("~/Profile/" + userName);
-
-			//return View("UserProfile"); // TODO: When I get posts figured out
 		}
 
 		[Authorize]
@@ -111,19 +109,22 @@ namespace SocialMediaSite.Controllers {
 		private bool isProfileValid(Profile profile) {
 			ModelState.Clear();
 
-			if(profile.Name == null) {
+			// Yes, it would be best to do the verification using the attribute tags, but I can't due to the virtual User required
+			// to make the foreign key. I could get rid of the official foreign key and just treat it like one anyway, but I don't
+			// want to do it like that, so now I get to have this function.
+			if(profile.Name == null || profile.Name.Length > 250) {
 				ModelState.AddModelError("Name", "Name cannot be blank");
 			}
 			if(profile.ProfilePicture == null) {
 				ModelState.AddModelError("ProfilePicture", "The profile picture link cannot be blank");
 			}
-			if(profile.FavAnime == null) {
+			if(profile.FavAnime == null || profile.FavAnime.Length > 100) {
 				ModelState.AddModelError("FavAnime", "User must specify what their favorite anime is");
 			}
-			if(profile.FavAnimeEpisode == null) {
+			if(profile.FavAnimeEpisode == null || profile.FavAnimeEpisode.Length > 50) {
 				ModelState.AddModelError("FavAnimeEpisode", "User must specify what their favorite anime episode is");
 			}
-			if(profile.LeastFavAnime == null) {
+			if(profile.LeastFavAnime == null || profile.LeastFavAnime.Length > 100) {
 				ModelState.AddModelError("LeastFavAnime", "User must specify what their least favorite anime is");
 			}
 

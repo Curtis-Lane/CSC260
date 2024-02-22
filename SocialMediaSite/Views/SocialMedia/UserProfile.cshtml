@@ -49,7 +49,6 @@
 			</div>
 		</div>
 	</form>
-	@* foreach loop here when I get posts sorted out *@
 	@for(int i = 0; i < Model.posts.Count(); i++) {
 		<div class="border">
 			<a href="~/Profile/@Model.posterNames.ElementAt(i)">@Model.posterNames.ElementAt(i)</a>
