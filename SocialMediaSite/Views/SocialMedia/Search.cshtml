@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
+	ViewData["Title"] = "Searching for users";
+}
+
+@model (IEnumerable<IdentityUser> users, IEnumerable<Profile> profiles)
+
+<form asp-controller="SocialMedia" asp-action="Search" method="post" class="d-flex my-3">
+	<input name="searchText" type="text" placeholder="Username" class="form-control me-2" />
+	<button type="submit" class="btn btn-secondary my-2">Search</button>
+</form>
+
+@if(Model.users.Count() == 0 || Model.profiles.Count() == 0) {
+	<h2 class="text-danger">
+		It would appear that there are no users that match your search <br />
+		Maybe you made a typo?
+	</h2>
+} else {
+	for(int i = 0; i < Model.users.Count(); i++) {
+		<div class="border my-2">
+			<img src="@Model.profiles.ElementAt(i).ProfilePicture" width="100" height="100" />
+			<a href="~/Profile/@Model.users.ElementAt(i).UserName">@Model.users.ElementAt(i).UserName</a>
+		</div>
+	}
+}

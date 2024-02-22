@@ -53,6 +53,10 @@ namespace SocialMediaSite.Data {
 			return db.Users.Where(u => u.Id == getProfileFromID(ID).UserID).FirstOrDefault();
 		}
 
+		public IEnumerable<IdentityUser> searchForUsers(string key) {
+			return db.Users.Where(u => u.UserName.ToLower().Contains(key.ToLower())).ToList();
+		}
+
 		public void addImage(Image image) {
 			db.Images.Add(image);
 			db.SaveChanges();

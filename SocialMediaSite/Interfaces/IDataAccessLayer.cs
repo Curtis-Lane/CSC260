@@ -23,6 +23,8 @@ namespace SocialMediaSite.Interfaces {
 
 		IdentityUser getUserFromProfileID(int ID);
 
+		IEnumerable<IdentityUser> searchForUsers(string key);
+
 		void addImage(Image image);
 
 		IEnumerable<Image> getImagesFromProfileID(int ID);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaSite.Interfaces;
 using SocialMediaSite.Models;
@@ -104,6 +105,22 @@ namespace SocialMediaSite.Controllers {
 			} else {
 				return View(profile);
 			}
+		}
+
+		[Authorize]
+		public IActionResult Search(string searchText) {
+			IEnumerable<IdentityUser> foundUsers = new List<IdentityUser>();
+			IEnumerable<Profile> foundProfiles = new List<Profile>();
+
+			if(!string.IsNullOrEmpty(searchText)) {
+				foundUsers = dal.searchForUsers(searchText);
+
+				foreach(IdentityUser user in foundUsers) {
+					((List<Profile>) foundProfiles).Add(dal.getProfileFromUser(user.Id));
+				}
+			}
+
+			return View((foundUsers, foundProfiles));
 		}
 
 		private bool isProfileValid(Profile profile) {
