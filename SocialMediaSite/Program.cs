@@ -14,18 +14,23 @@ namespace SocialMediaSite {
 				options.UseSqlServer(connectionString));
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-				.AddEntityFrameworkStores<ApplicationDbContext>();
+			//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+			//	.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+				.AddDefaultUI().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+
+			builder.Services.AddRazorPages();
 
 			builder.Services.AddTransient<IDataAccessLayer, SocialMediaDAL>();
 
 			builder.Services.Configure<IdentityOptions>(options => {
-				// Password settingsw
+				// Password settings
 				options.Password.RequireDigit = false;
 				options.Password.RequireLowercase = true;
 				options.Password.RequireUppercase = true;
 				options.Password.RequiredLength = 10;
-				options.Password.RequiredUniqueChars = 0; // Number of non-alphanumeric characters required
+				options.Password.RequiredUniqueChars = 1; // Number of non-alphanumeric characters required
 				// Why doesn't this last one work?
 				
 				// Lockout
@@ -74,9 +79,15 @@ namespace SocialMediaSite {
 			);
 
 			app.MapControllerRoute(
+				name: "UserProfile",
+				pattern: "/{profileUsername}",
+				defaults: new {controller = "SocialMedia", action = "UserProfile"}
+			);
+			
+			app.MapControllerRoute(
 				name: "TheFinalCatchAll",
 				pattern: "{*any}",
-				defaults: new {controller="Home", action="Error"}
+				defaults: new {controller="Home", action="Index"}
 			);
 
 			app.MapRazorPages();

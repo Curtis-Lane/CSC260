@@ -44,6 +44,7 @@ namespace SocialMediaSite.Controllers {
 			post.Contents = message;
 			post.PosterID = dal.getProfileFromUser(GetCurrentUserID()).ID;
 			post.PostedOnID = postedOnID;
+			post.PostDate = DateTime.Now;
 
 			dal.addPost(post);
 
@@ -109,15 +110,15 @@ namespace SocialMediaSite.Controllers {
 
 		[Authorize]
 		public IActionResult Search(string searchText) {
-			IEnumerable<IdentityUser> foundUsers = new List<IdentityUser>();
+			IEnumerable<IdentityUser> foundUsers;
 			IEnumerable<Profile> foundProfiles = new List<Profile>();
 
-			if(!string.IsNullOrEmpty(searchText)) {
-				foundUsers = dal.searchForUsers(searchText);
+			if(searchText == null) searchText = string.Empty;
 
-				foreach(IdentityUser user in foundUsers) {
-					((List<Profile>) foundProfiles).Add(dal.getProfileFromUser(user.Id));
-				}
+			foundUsers = dal.searchForUsers(searchText);
+
+			foreach(IdentityUser user in foundUsers) {
+				((List<Profile>) foundProfiles).Add(dal.getProfileFromUser(user.Id));
 			}
 
 			return View((foundUsers, foundProfiles));

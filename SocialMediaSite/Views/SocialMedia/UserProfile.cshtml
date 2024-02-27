@@ -23,7 +23,7 @@
 					My favorite anime is @Model.profile.FavAnime
 				</li>
 				<li>
-					My favorite anime episode is @Model.profile.FavAnimeEpisode
+					My favorite anime episode is <i>@Model.profile.FavAnimeEpisode</i>
 				</li>
 				<li>
 					My least favorite anime is @Model.profile.LeastFavAnime
@@ -51,7 +51,9 @@
 	</form>
 	@for(int i = 0; i < Model.posts.Count(); i++) {
 		<div class="border">
-			<a href="~/Profile/@Model.posterNames.ElementAt(i)">@Model.posterNames.ElementAt(i)</a>
+			<p>
+				<a href="~/Profile/@Model.posterNames.ElementAt(i)">@Model.posterNames.ElementAt(i)</a> - @Model.posts.ElementAt(i).PostDate.ToShortDateString() - @Model.posts.ElementAt(i).PostDate.ToShortTimeString()
+			</p>
 			<p>
 				@Model.posts.ElementAt(i).Contents
 			</p>

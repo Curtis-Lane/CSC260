@@ -14,5 +14,8 @@ namespace SocialMediaSite.Models {
 
 		[Required]
 		public int PostedOnID {get; set;}
+
+		[Required]
+		public DateTime PostDate {get; set;}
 	}
 }
